@@ -1,6 +1,7 @@
 import type { Level } from "../types/types";
 
 interface SquareProps {
+    date: string;
     level: Level;
 }
 
@@ -13,9 +14,14 @@ const levelColors: Record<Level, string> = {
     4: "bg-green-800", // 一番濃い緑
 };
 
-export const Square = ({ level }: SquareProps) => {
+export const Square = ({ date, level }: SquareProps) => {
     // マッピングからクラスを取得
     const colorClass = levelColors[level];
 
-    return <div className={`w-4 h-4 rounded-sm ${colorClass} transition-colors duration-200 cursor-pointer`}></div>;
+    return (
+        <div
+            title={date}
+            className={`w-4 h-4 rounded-sm ${colorClass} transition-colors duration-200 cursor-pointer`}
+        ></div>
+    );
 };
