@@ -41,6 +41,10 @@ function App() {
 
     const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().split("T")[0]);
 
+    const onDateChange = (newDate: string) => {
+        setSelectedDate(newDate);
+    };
+
     // オブジェクトを「キー（日付）」と「値（Level）」のペアの配列に変換
     const recordEntries = Object.entries(records).sort((a, b) => a[0].localeCompare(b[0]));
 
@@ -49,7 +53,7 @@ function App() {
             <h1 className="text-3xl font-bold text-center">Habit Tracker</h1>
             <div className="card">
                 <div className="card-body space-y-4 items-center">
-                    <DateController selectedDate={selectedDate} />
+                    <DateController selectedDate={selectedDate} onDateChange={onDateChange} />
                 </div>
             </div>
             <div className="card">
