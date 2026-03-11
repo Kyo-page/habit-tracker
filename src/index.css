@@ -5,3 +5,5 @@
 
 
 @plugin "@iconify/tailwind4";
+
+@import "flyonui/src/vendor/fullcalendar.css";
