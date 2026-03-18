@@ -1,7 +1,8 @@
 import { useState } from "react";
-import type { DailyRecord } from "./types/types";
+import type { DailyRecord, Level } from "./types/types";
 import { Square } from "./components/Square";
 import { DateController } from "./components/DateController";
+import { LevelSelector } from "./components/LevelSelector";
 
 // ダミーデータ
 const dummyData: DailyRecord = {
@@ -41,6 +42,10 @@ function App() {
 
     const [selectedDate, setSelectedDate] = useState<string>(new Date().toISOString().split("T")[0]);
 
+    const handleLevelSelect = (level: Level) => {
+        setRecords((prev) => ({ ...prev, [selectedDate]: level }));
+    };
+
     // オブジェクトを「キー（日付）」と「値（Level）」のペアの配列に変換
     const recordEntries = Object.entries(records).sort((a, b) => a[0].localeCompare(b[0]));
 
@@ -50,6 +55,7 @@ function App() {
             <div className="card">
                 <div className="card-body space-y-4 items-center">
                     <DateController selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+                    <LevelSelector level={records[selectedDate] || 0} onSelect={handleLevelSelect} />
                 </div>
             </div>
             <div className="card">
